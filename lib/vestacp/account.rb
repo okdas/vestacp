@@ -16,7 +16,7 @@ module Vestacp
     # See:
     #
     # http://vestacp.com/docs/api/#add_user
-    def self.add_client(raw = {})
+    def self.add(raw = {})
       args = {
         username: 'arg1',
         password: 'arg2',
@@ -36,13 +36,80 @@ module Vestacp
     # Parameters:
     #
     # * <tt>:username</tt>
-    def self.delete_user(raw = {})
+    def self.delete(raw = {})
       args = {
-        username: 'arg1',
+        username: 'arg1'
       }
       params = {}
       raw.each {|key, value| params[args[key].to_sym] = value }
       params.merge!(cmd: 'v-delete-user')
+      send_request(params, raw)
+    end
+
+
+    # Suspend User Account
+    #
+    # Parameters:
+    #
+    # * <tt>:username</tt>
+    def self.suspend(raw = {})
+      args = {
+        username: 'arg1'
+      }
+      params = {}
+      raw.each {|key, value| params[args[key].to_sym] = value }
+      params.merge!(cmd: 'v-suspend-user')
+      send_request(params, raw)
+    end
+
+
+    # Suspend User Account
+    #
+    # Parameters:
+    #
+    # * <tt>:username</tt>
+    def self.unsuspend(raw = {})
+      args = {
+        username: 'arg1'
+      }
+      params = {}
+      raw.each {|key, value| params[args[key].to_sym] = value }
+      params.merge!(cmd: 'v-unsuspend-user')
+      send_request(params, raw)
+    end
+
+
+    # List User Account Information
+    #
+    # Returns JSON.
+    #
+    # Parameters:
+    #
+    # * <tt>:username</tt>
+    def self.information(raw = {})
+      args = {
+        username: 'arg1'
+      }
+      params = {}
+      raw.each {|key, value| params[args[key].to_sym] = value }
+      params.merge!(cmd: 'v-list-user', arg2: 'json')
+      send_request(params, raw, true)
+    end
+
+    # Check User Account Credentials
+    #
+    # Parameters:
+    #
+    # * <tt>:username</tt>
+    # * <tt>:password</tt>
+    def self.check_credentials(raw = {})
+      args = {
+        username: 'arg1',
+        password: 'arg2'
+      }
+      params = {}
+      raw.each {|key, value| params[args[key].to_sym] = value }
+      params.merge!(cmd: 'v-list-user')
       send_request(params, raw)
     end
   end
