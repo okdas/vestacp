@@ -46,7 +46,6 @@ module Vestacp
         req.body = params
       end
 
-      binding.pry
       parse_response(json_response ? JSON.parse(response.body) : response.body)
     end
 
